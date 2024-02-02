@@ -40,7 +40,7 @@ module.exports.getJSON = async(table, key, value, ttl = true)=>{
   try{
     let sql = `SELECT * FROM ${table} WHERE ${key}='${value}'`
     if(ttl) sql += ` AND ttl>${Date.now()}`
-    let result = await client.query(sql, queryOpts)
+    let results = await client.query(sql, queryOpts)
     let json = results.get(0)?.data.data
     if(json) return JSON.parse(json)
   }catch(e){
